@@ -103,23 +103,58 @@ function createMap(earthquakes) {
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
-
+  
   // Create a legend to display information in the bottom right
-  var legend = L.control({position: 'bottomright'});
+  var legend = L.control({position: "bottomright"});
 
   legend.onAdd = function(map) {
-
-    var div = L.DomUtil.create('div','info legend'),
-        magnitudes = [0,1,2,3,4,5];
-
-    div.innerHTML += "<h4 style='margin:4px'>Magnitude</h4>" 
+    var div = L.DomUtil.create("div", "info legend");
+    var grades = [0,1,2,3,4,5];
+    var colors = [
+      'lightgreen',
+      'yellowgreen',
+      'gold',
+      'orange',
+      'lightsalmon',
+      'tomato'
+    ];
+    div.innerHTML += "<h4 style='margin:4px'>Magnitude</h4>"
     // loop through our density intervals and generate a label for each interval
-    for (var i=0; i < magnitudes.length; i++){
+    for (var i = 0; i < grades.length; i++) { 
       div.innerHTML +=
-        '<i style="background:' + getColor(magnitudes[i] +1) + '"></i> ' +
-        magnitudes[i] + (magnitudes[i+1]?'&ndash;' + magnitudes[i+1] +'<br>': '+');
-      }
-      return div;
+        "<i style='background: " + colors[i] + "'>&nbsp&nbsp&nbsp&nbsp</i> " +
+        grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+    }
+    return div;
   };
+  // Append legend to map.
   legend.addTo(myMap);
 }
+//   
+//   var legend = L.control({position: 'bottomright'});
+
+//   legend.onAdd = function(map) {
+
+//     var div = L.DomUtil.create('div','info legend');
+//     var magnitudes = [0,1,2,3,4,5];
+//     var colors [
+//       'lightgreen',
+//       'yellowgreen',
+//       'gold',
+//       'orange',
+//       'lightsalmon',
+//       'tomato'
+//     ];
+
+    
+//     
+//     for (var i=0; i < magnitudes.length; i++){
+//       div.innerHTML += "<h4 style='margin:4px'>Magnitude</h4>" 
+//       div.innerHTML +=
+//         '<i style="background:' + getColor(magnitudes[i] +1) + '"></i> ' +
+//         magnitudes[i] + (magnitudes[i+1]?'&ndash;' + magnitudes[i+1] +'<br>': '+');
+//       }
+//       return div;
+//   };
+//   legend.addTo(myMap);
+// }
